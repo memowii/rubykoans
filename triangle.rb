@@ -12,8 +12,16 @@
 #   about_triangle_project.rb
 # and
 #   about_triangle_project_2.rb
-#
+
+$error_type_1 = 'A triangle should not have any sides of length 0'
+$error_type_2 = "Negative length doesn't make sense"
+$error_type_3 = 'Any two sides of a triangle should add up to more than the third side.'
+
 def triangle(a, b, c)
+  raise TriangleError.new($error_type_1) if a == 0 && b == 0 && c == 0
+  raise TriangleError.new($error_type_2) if a < 0 || b < 0 || c < 0
+  raise TriangleError.new($error_type_2) if (a+b <= c) || (b+c <= a) || (a+c <= b)
+
   return :equilateral if a == b && b == c
   return :isosceles if a == b || b == c || a == c
   :scalene
