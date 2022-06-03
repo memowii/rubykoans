@@ -29,20 +29,22 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
-def score(dice)
-  # You need to write this method
-  score_record = {
-    1 => 0, # 4
-    2 => 0, #
-    3 => 0, #
-    4 => 0, #
-    5 => 0, # 1, 3
-    6 => 0, #
+def build_score_record
+  {
+    1 => 0,
+    2 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
   }
-  score = 0
+end
 
+def score(dice)
   return 0 if dice.empty?
 
+  score = 0
+  score_record = build_score_record
   dice.each do |result|
     score_record[result] += 1
   end
@@ -62,21 +64,10 @@ def score(dice)
       else
         score += value * 50
       end
-    else
-      if value == 3
-        score += key * 100
-      end
+    elsif value == 3
+      score += key * 100
     end
   end
-
-  # numbers_of_3 = score_record.select { |key, value | key >= 2 && value >= 3 }
-  # if !numbers_of_3.empty?
-  #   score += numbers_of_3.first[1] * 100
-  #   number_of_3 = numbers_of_3.first
-  #   if number_of_3[0] == 5 && number_of_3[1] > 3
-  #     score += (number_of_3[1] - 3) * 50
-  #   end
-  # end
 
   score
 end
